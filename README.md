@@ -1,70 +1,120 @@
-# Getting Started with Create React App
+README.md
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# N-Tech Help Portal
 
-## Available Scripts
+N-Tech Help Portal is a React application designed to assist Netflix employees with IT helpdesk requests. Users can select from a variety of common issues and submit their requests, which are then sent to a specified Google Forms URL.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Select Helpdesk Requests:** Users can choose from a range of common IT issues.
+- **Submit Requests:** Requests are sent to a Google Forms URL for processing.
+- **Responsive Design:** The app is designed to work across different devices.
+- **Animations:** Includes animations for better user experience.
+- **Background Image:** Uses a custom background image.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Project Structure
+n-tech-help-portal ├── public │ ├── background.jpg │ ├── ntechbot.png │ └── index.html ├── src │ ├── components │ │ └── Button.js │ ├── App.js │ ├── App.css │ ├── index.js │ └── script.js ├── .env ├── package.json └── README.md
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+## Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [Node.js](https://nodejs.org/) (version 14.0.0 or higher)
+- [npm](https://www.npmjs.com/) (version 6.0.0 or higher)
+- [Git](https://git-scm.com/)
 
-### `npm run build`
+## Getting Started
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. **Clone the repository:**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    ```sh
+    git clone https://github.com/your-username/n-tech-help-portal.git
+    cd n-tech-help-portal
+    ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. **Install dependencies:**
 
-### `npm run eject`
+    ```sh
+    npm install
+    ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+3. **Start the development server:**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    ```sh
+    npm start
+    ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+4. **Open the application in your browser:**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+    Navigate to `http://localhost:3000` to view the application.
 
-## Learn More
+## Configuration
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Environment Variables
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Create a `.env` file in the root directory to configure environment variables. For example:
+REACT_APP_GOOGLE_FORM_URL=https://docs.google.com/forms/d/1908DhS9F-bfp6D_GgyPAwaknZLMo1Nz80UKDMGw3-Ng/formResponse
 
-### Code Splitting
+Copy code
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+### Backend Server (Optional)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+If you have a backend server, make sure it is running. Here is an example of how to set up a simple Express server to handle form submissions:
 
-### Making a Progressive Web App
+```js
+const express = require('express');
+const nodemailer = require('nodemailer');
+const dotenv = require('dotenv');
+const cors = require('cors');
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+dotenv.config();
 
-### Advanced Configuration
+const app = express();
+const PORT = process.env.PORT || 5000;
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+app.use(cors());
+app.use(express.json());
 
-### Deployment
+app.post('/submit_ticket', (req, res) => {
+  const { email, subject, description } = req.body;
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: process.env.EMAIL,
+      pass: process.env.EMAIL_PASSWORD,
+    },
+  });
 
-### `npm run build` fails to minify
+  const mailOptions = {
+    from: email,
+    to: 'askntech@netflix.com',
+    subject: subject,
+    text: description,
+  };
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error(error);
+      res.status(500).send('Failed to submit the ticket. Please try again.');
+    } else {
+      res.status(200).send('Ticket submitted successfully!');
+    }
+  });
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+Contributing
+Contributions are welcome! Please feel free to submit a pull request or open an issue.
+
+License
+This project is licensed under the MIT License. See the LICENSE file for more details.
+
+Acknowledgements
+React
+Nodemailer
+Google Forms
+VS Code
+GitHub
