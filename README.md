@@ -2,7 +2,7 @@ README.md
 
 # N-Tech Help Portal
 
-N-Tech Help Portal is a React application designed to assist Netflix employees with IT helpdesk requests. Users can select from a variety of common issues and submit their requests, which are then sent to a specified Google Forms URL.
+N-Tech Help Portal is a React application designed to assist employees with IT helpdesk requests. Users can select from a variety of common issues and submit their requests, which are then sent to a specified Google Forms URL.
 
 ## Features
 
