@@ -1,38 +1,166 @@
-.App {
+@keyframes slideIn {
+  from {
+      transform: translateX(-100%);
+  }
+  to {
+      transform: translateX(0);
+  }
+}
+
+@keyframes hover {
+  0%, 100% {
+      transform: translateY(0);
+  }
+  50% {
+      transform: translateY(-10px);
+  }
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: url('/public/background.jpg') no-repeat center center fixed; /* Use background image from public folder */
+  background-size: cover; /* Cover the whole page */
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px; /* Increase the max-width */
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #ffffff; /* White background for the container */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.logo {
+  max-height: 150px; /* Increase the height to make it 3 times bigger */
+  margin-right: 10px;
+  animation: slideIn 1s ease-out, hover 3s infinite;
+}
+
+h1 {
+  color: #e50914; /* Netflix red */
+}
+
+p {
+  text-align: center;
+  color: #666;
+}
+
+.form-group {
+  width: 100%;
+  margin-bottom: 15px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+input[type="email"], textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: calc(100% - 24px); /* Adjust width for padding */
+  margin: 0 auto;
+  display: block;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+textarea {
+  height: 64px; /* Set height to 64px */
+  resize: none; /* Disable resizing */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.button-container {
+  display: flex;
+  justify-content: center; /* Center the columns */
+  gap: 20px; /* Space between columns */
+  margin-bottom: 20px;
+  flex-wrap: wrap; /* Allow buttons to wrap */
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items within the column */
+}
+
+.item {
+  width: 240px; /* Increase width */
+  height: 90px; /* Increase height */
+  padding: 0; /* Remove padding to fit the height */
+  margin: 8px 0;
+  background-color: #e50914; /* Netflix red */
+  color: #ffffff; /* White text */
+  text-align: center;
+  cursor: pointer;
+  border-radius: 20px; /* Rounded corners */
+  transition: background-color 0.3s, transform 0.3s; /* Add transition for transform */
+  display: flex;
+  flex-direction: column; /* Stack icon and text vertically */
+  align-items: center;
+  justify-content: center;
+  font-size: 18px; /* Larger font size */
+}
+
+.item a {
+  color: #ffffff; /* White text */
+  text-decoration: none;
+  display: flex;
+  flex-direction: column; /* Stack icon and text vertically */
+  align-items: center;
+  width: 100%; /* Ensure the link takes the full width of the item */
+  justify-content: center;
+}
+
+.item i {
+  font-size: 32px; /* Increase icon size */
+  margin-bottom: 4px; /* Space between icon and text */
+}
+
+.item span {
+  font-size: 16px; /* Larger font size for text */
+}
+
+.item:hover {
+  background-color: #b10610; /* Darker Netflix red */
+  transform: scale(1.1); /* Zoom in on hover */
+}
+
+.item:active {
+  transform: rotate(10deg); /* Rotate on click */
+}
+
+.something-else {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.something-else h2 {
+  color: #e50914; /* Netflix red */
+}
+
+form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.submit-btn {
+  padding: 10px 20px;
+  background-color: #e50914; /* Netflix red */
+  color: #ffffff; /* White text */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.submit-btn:hover {
+  background-color: #b10610; /* Darker Netflix red */
 }
